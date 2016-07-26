@@ -179,7 +179,7 @@ if __name__ == "__main__":
             continue
         
         cmd_vot_front_end = [
-            'VotFrontEnd2'
+            'VotFrontEnd2',
             '-verbose', args.logging_level,
             input_filename,
             features_filename,
@@ -192,8 +192,8 @@ if __name__ == "__main__":
             'VotDecode',
             '-verbose', args.logging_level,
             '-max_onset', '200',
-            '-min_vot_length', args.min_vot_length,
-            '-max_vot_length', args.max_vot_length,
+            '-min_vot_length', str(args.min_vot_length),
+            '-max_vot_length', str(args.max_vot_length),
             '-output_predictions',
             preds_filename,
             features_filename,
