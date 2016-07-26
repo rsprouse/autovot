@@ -34,8 +34,8 @@ from itertools import izip
 import numpy as np
 
 from auto_vot_extract_features import *
-from helpers.utilities import *
-from helpers.textgrid import *
+from autovot.utilities import *
+from autovot.textgrid import *
 
 
 if __name__ == "__main__":

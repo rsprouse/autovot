@@ -30,7 +30,7 @@ import shutil
 import tempfile
 
 from auto_vot_extract_features import *
-from helpers.utilities import *
+from autovot.utilities import *
 
 
 if __name__ == "__main__":

@@ -25,8 +25,8 @@
 import argparse
 from os.path import splitext, basename, isfile
 
-from helpers.textgrid import *
-from helpers.utilities import *
+from autovot.textgrid import *
+from autovot.utilities import *
 
 
 class Instance:
