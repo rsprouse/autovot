@@ -191,7 +191,7 @@ if __name__ == "__main__":
         cmd_vot_decode = [
             'VotDecode',
             '-verbose', args.logging_level,
-            '-max_onset', 200,
+            '-max_onset', '200',
             '-min_vot_length', args.min_vot_length,
             '-max_vot_length', args.max_vot_length,
             '-output_predictions',
