@@ -35,16 +35,16 @@ def num_lines(filename):
     return lines
 
 
-def easy_call(command):
+def easy_call(cmd_args):
     try:
-        logging.debug(command)
-        return_code = subprocess.call(command, shell=True)
+        logging.debug(" ".join(cmd_args))
+        return_code = subprocess.call(cmd_args)
         if return_code == 127 or return_code < 0:
             logging.debug('Return code: %d' % return_code)
             exit(-1)
     except Exception as exception:
         logging.error('Could not execute the following:')
-        logging.error(command)
+        logging.error(" ".join(cmd_args))
         logging.error('%s - %s' % (type(exception), exception.args))
         exit(-1)
 

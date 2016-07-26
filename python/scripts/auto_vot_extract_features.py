@@ -311,8 +311,13 @@ if __name__ == "__main__":
                                            args.features_filename, args.features_dir, tier_definitions, args.decoding)
 
     # call front end
-    cmd_vot_front_end = 'VotFrontEnd2 -verbose %s %s %s %s' % (args.logging_level, args.input_filename,
-                                                               args.features_filename, args.labels_filename)
+    cmd_vot_front_end = [
+        'VotFrontEnd2',
+        '-verbose', args.logging_level,
+        args.input_filename,
+        args.features_filename,
+        args.labels_filename
+    ]
     easy_call(cmd_vot_front_end)
 
     if len(problematic_files):

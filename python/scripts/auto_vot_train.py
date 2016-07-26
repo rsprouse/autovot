@@ -89,8 +89,13 @@ if __name__ == "__main__":
                                            features_dir, tier_definitions)
 
     # call front end
-    cmd_vot_front_end = 'VotFrontEnd2 -verbose %s %s %s %s' % (args.logging_level, input_filename, features_filename,
-                                                               labels_filename)
+    cmd_vot_front_end = [
+        'VotFrontEnd2',
+        '-verbose', args.logging_level,
+        input_filename,
+        features_filename,
+        labels_filename
+    ]
     easy_call(cmd_vot_front_end)
 
     # Randomize training order of the examples.  We assume the user wants to do this, as it tends to result in better classifiers.
@@ -119,12 +124,27 @@ if __name__ == "__main__":
         labels_filename_test = labels_filename_rs + ".test"
         extract_lines(labels_filename_rs, labels_filename_test, instance_range_for_test, has_header=True)
         # Training
-        cmd_vot_training = 'VotTrain -verbose %s -pos_only -vot_loss -epochs 2 -loss_eps 4 -min_vot_length 5 %s %s %s' % \
-            (args.logging_level, features_filename_training, labels_filename_training, args.model_filename)
+        cmd_vot_training = [
+            'VotTrain',
+            '-verbose', args.logging_level,
+            '-pos_only',
+            '-vot_loss',
+            '-epochs', 2,
+            '-loss_eps', 4,
+            '-min_vot_length', 5,
+            features_filename_training,
+            labels_filename_training,
+            args.model_filename
+        ]
         easy_call(cmd_vot_training)
         # Testing
-        cmd_vot_decode = 'VotDecode -verbose %s %s %s %s' % (args.logging_level, features_filename_test,
-            labels_filename_test, args.model_filename)
+        cmd_vot_decode = [
+            'VotDecode',
+            '-verbose', args.logging_level,
+            features_filename_test,
+            labels_filename_test,
+            args.model_filename
+        ]
         easy_call(cmd_vot_decode)
 
     ## Option 2: Otherwise, if the user specified data to be used for cross-validation, use that.
@@ -139,17 +159,37 @@ if __name__ == "__main__":
         problematic_files += textgrid2front_end(args.cv_textgrid_list, args.cv_wav_list, input_filename_test,
                                                 features_filename_test, features_dir, tier_definitions)
         # call front end
-        cmd_vot_front_end = 'VotFrontEnd2 -verbose %s %s %s %s' % (args.logging_level, input_filename_test,
-            features_filename_test, labels_filename_test)
+        cmd_vot_front_end = [
+            'VotFrontEnd2',
+            '-verbose', args.logging_level,
+            input_filename_test,
+            features_filename_test,
+            labels_filename_test
+        ]
         easy_call(cmd_vot_front_end)
         # Training
-        cmd_vot_training = 'VotTrain -verbose %s -pos_only -vot_loss -epochs 2 -loss_eps 4 -min_vot_length 5 ' \
-                           '- C 50 %s %s %s' % (args.logging_level, features_filename_training,
-                                                labels_filename_training, args.model_filename)
+        cmd_vot_training = [
+            'VotTrain',
+            '-verbose', args.logging_level,
+            '-pos_only',
+            '-vot_loss',
+            '-epochs', 2,
+            '-loss_eps', 4,
+            '-min_vot_length', 5,
+            '-C', 50,
+            features_filename_training,
+            labels_filename_training,
+            args.model_filename
+        ]
         easy_call(cmd_vot_training)
         # Test
-        cmd_vot_decode = 'VotDecode -verbose %s %s %s %s' % (args.logging_level, features_filename_test,
-            labels_filename_test, args.model_filename)
+        cmd_vot_decode = [
+            'VotDecode',
+            '-verbose', args.logging_level,
+            features_filename_test,
+            labels_filename_test,
+            args.model_filename
+        ]
         easy_call(cmd_vot_decode)
 
     ## Option 3: Otherwise, use all data for training, and don't do any cross-validation.
@@ -157,9 +197,19 @@ if __name__ == "__main__":
         features_filename_training = features_filename_rs
         labels_filename_training = labels_filename_rs
         # Training
-        cmd_vot_training = 'VotTrain -verbose %s -pos_only -vot_loss -epochs 2 -loss_eps 4 -min_vot_length 5 ' \
-                           '-C 50 %s %s %s' % (args.logging_level, features_filename_training,
-                                               labels_filename_training, args.model_filename)
+        cmd_vot_training = [
+            'VotTrain',
+            '-verbose', args.logging_level,
+            '-pos_only',
+            '-vot_loss',
+            '-epochs', 2,
+            '-loss_eps', 4,
+            '-min_vot_length', 5,
+            '-C', 50,
+            features_filename_training,
+            labels_filename_training,
+            args.model_filename
+        ]
         easy_call(cmd_vot_training)
 
     # remove working directory and its content
