@@ -1,4 +1,6 @@
 
+*.pyc
+python/build/
 autovot/bin/.idea/
 autovot/bin/.idea/
 autovot/bin/VotDecode
